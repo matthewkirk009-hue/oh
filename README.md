@@ -1,16 +1,16 @@
 # ROTC Homework Command Center
 
-A lightweight web tracker that starts on **March 30, 2026** and helps track progress through graduation month (**May 2028**) with an XP + rank-up system.
+A browser-based ROTC-style tracker that starts on **March 30, 2026** and helps track progress to graduation month (**May 2028**) with XP, ranks, and reward progression.
 
 ## Features
 
-- Add homework assignments to a to-do list with fixed XP tiers: **10 / 20 / 50**.
-- Complete assignments to earn XP.
+- Professional multi-panel UI with separate tabs for Overview, Assignments, Study, and Rewards.
+- Assignment tracker with fixed XP tiers (**10 / 20 / 50**) and persistent local save.
+- Complete assignments to earn XP and rank up through **120 total ranks**.
 - Log an **A** on a test for **+100 XP**.
-- Run a study timer and earn **1 XP per full minute** studied when ending a session.
-- Progress through **120 ROTC-styled ranks** with improving reward tiers.
-- Tracks current rank, total XP, and days remaining until graduation month.
-- Saves all progress in `localStorage`.
+- Study timer that grants **1 XP per full minute** when session ends.
+- Robust persistence with safe state loading and migration from older saved versions.
+- Session feedback toast messages for adds/completions/actions.
 
 ## Run
 

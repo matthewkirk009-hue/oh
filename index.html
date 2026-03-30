@@ -7,97 +7,121 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <main class="app">
-      <header class="hero">
-        <h1>ROTC Homework Command Center</h1>
-        <p>
-          Mission window: <strong>March 30, 2026</strong> through
-          <strong>May 31, 2028</strong>
-        </p>
-      </header>
-
-      <section class="status-grid">
-        <article class="card">
-          <h2>Cadet Status</h2>
-          <p class="big-text" id="rankName">Cadet Recruit</p>
-          <p id="rankMeta">Rank 1 of 120</p>
-          <div class="progress-wrap">
-            <div id="rankProgress" class="progress-bar"></div>
-          </div>
-          <p id="xpMeta">0 / 100 XP to next rank</p>
-        </article>
-
-        <article class="card">
-          <h2>XP Ledger</h2>
-          <p class="big-text"><span id="totalXp">0</span> XP</p>
-          <p>Assignments completed: <span id="assignmentsDone">0</span></p>
-          <p>A-tests logged: <span id="testsAced">0</span></p>
-        </article>
-
-        <article class="card">
-          <h2>Time Remaining</h2>
-          <p class="big-text" id="daysRemaining">0 days</p>
-          <p>Until graduation month (May 2028).</p>
-          <p>Stay disciplined. Stay consistent.</p>
-        </article>
-      </section>
-
-      <section class="card">
-        <h2>New Assignment</h2>
-        <form id="assignmentForm" class="form-grid">
-          <label>
-            Assignment
-            <input id="assignmentTitle" required maxlength="120" placeholder="e.g., Algebra worksheet" />
-          </label>
-          <label>
-            Subject
-            <input id="assignmentSubject" maxlength="80" placeholder="e.g., Math" />
-          </label>
-          <label>
-            Difficulty XP
-            <select id="assignmentXp" required>
-              <option value="10">Easy (10 XP)</option>
-              <option value="20">Standard (20 XP)</option>
-              <option value="50">Hard (50 XP)</option>
-            </select>
-          </label>
-          <button type="submit">Add to To-Do</button>
-        </form>
-      </section>
-
-      <section class="card">
-        <h2>Test Bonus</h2>
-        <p>If you scored an <strong>A</strong> on a test, log it for a 100 XP bonus.</p>
-        <button id="logATest">Log A-Test (+100 XP)</button>
-      </section>
-
-      <section class="card">
-        <h2>Study Timer</h2>
-        <p>
-          Start your timer while you study. You earn <strong>1 XP per minute</strong> when you stop
-          the session.
-        </p>
-        <p class="big-text" id="studyClock">00:00:00</p>
-        <p>Study sessions completed: <span id="studySessions">0</span></p>
-        <p>Total study time: <span id="studyMinutes">0</span> minutes</p>
-        <div class="timer-actions">
-          <button id="startStudy">Start Study Session</button>
-          <button id="stopStudy">Stop + Claim XP</button>
-          <button id="resetStudy" type="button">Reset Timer</button>
+    <div class="layout">
+      <aside class="sidebar card">
+        <div>
+          <p class="eyebrow">Cadet Ops</p>
+          <h1>ROTC Homework<br />Command Center</h1>
+          <p class="muted">Mission: March 30, 2026 → May 31, 2028</p>
         </div>
-      </section>
 
-      <section class="card">
-        <h2>To-Do Briefing</h2>
-        <ul id="assignmentList" class="todo-list"></ul>
-      </section>
+        <nav class="nav-tabs" aria-label="Main navigation">
+          <button class="tab-btn active" data-tab="overview">Overview</button>
+          <button class="tab-btn" data-tab="assignments">Assignments</button>
+          <button class="tab-btn" data-tab="study">Study</button>
+          <button class="tab-btn" data-tab="rewards">Rewards</button>
+        </nav>
 
-      <section class="card">
-        <h2>Reward Intel</h2>
-        <p id="nextReward">Next reward appears here.</p>
-      </section>
-    </main>
+        <section class="quick card-lite">
+          <p class="muted small">Current Rank</p>
+          <p class="strong" id="rankName">Cadet Recruit</p>
+          <p class="small muted" id="rankMeta">Rank 1 of 120</p>
+          <div class="progress-wrap"><div id="rankProgress" class="progress-bar"></div></div>
+          <p class="small" id="xpMeta">0 / 100 XP to next rank</p>
+        </section>
+      </aside>
 
+      <main class="content">
+        <section id="tab-overview" class="tab-panel active" aria-labelledby="overview">
+          <div class="top-grid">
+            <article class="card stat-card">
+              <p class="muted">Total XP</p>
+              <p class="big" id="totalXp">0</p>
+              <p class="small muted">Assignments: <span id="assignmentsDone">0</span> · A-tests: <span id="testsAced">0</span></p>
+            </article>
+            <article class="card stat-card">
+              <p class="muted">Time Remaining</p>
+              <p class="big" id="daysRemaining">0 days</p>
+              <p class="small muted">Until graduation month</p>
+            </article>
+            <article class="card stat-card">
+              <p class="muted">Study Progress</p>
+              <p class="big"><span id="studyMinutes">0</span> min</p>
+              <p class="small muted">Sessions completed: <span id="studySessions">0</span></p>
+            </article>
+          </div>
+
+          <article class="card">
+            <h2>Command Notes</h2>
+            <ul class="notes">
+              <li>Easy assignment = 10 XP, Standard = 20 XP, Hard = 50 XP.</li>
+              <li>Log an A on a test for +100 XP.</li>
+              <li>Study earns 1 XP per full minute after ending the timer.</li>
+            </ul>
+          </article>
+        </section>
+
+        <section id="tab-assignments" class="tab-panel" aria-labelledby="assignments">
+          <article class="card">
+            <h2>New Assignment</h2>
+            <form id="assignmentForm" class="form-grid">
+              <label>
+                Assignment
+                <input id="assignmentTitle" required maxlength="120" placeholder="e.g., Algebra worksheet" />
+              </label>
+              <label>
+                Subject
+                <input id="assignmentSubject" maxlength="80" placeholder="e.g., Math" />
+              </label>
+              <label>
+                Difficulty XP
+                <select id="assignmentXp" required>
+                  <option value="10">Easy (10 XP)</option>
+                  <option value="20">Standard (20 XP)</option>
+                  <option value="50">Hard (50 XP)</option>
+                </select>
+              </label>
+              <button class="primary" type="submit">Add Assignment</button>
+            </form>
+          </article>
+
+          <article class="card">
+            <div class="row-between">
+              <h2>To-Do Briefing</h2>
+              <p class="small muted">Saved automatically</p>
+            </div>
+            <ul id="assignmentList" class="todo-list"></ul>
+          </article>
+        </section>
+
+        <section id="tab-study" class="tab-panel" aria-labelledby="study">
+          <article class="card">
+            <h2>Study Timer</h2>
+            <p class="clock" id="studyClock">00:00:00</p>
+            <div class="timer-actions">
+              <button id="startStudy" class="primary">Start</button>
+              <button id="stopStudy">Stop + Claim XP</button>
+              <button id="resetStudy" type="button">Reset</button>
+            </div>
+          </article>
+
+          <article class="card">
+            <h2>Test Bonus</h2>
+            <p class="muted">Scored an A on a test? Log it for an instant 100 XP.</p>
+            <button id="logATest" class="primary">Log A-Test (+100 XP)</button>
+          </article>
+        </section>
+
+        <section id="tab-rewards" class="tab-panel" aria-labelledby="rewards">
+          <article class="card">
+            <h2>Reward Intel</h2>
+            <p id="nextReward">Next reward appears here.</p>
+          </article>
+        </section>
+      </main>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
     <script src="app.js"></script>
   </body>
 </html>
