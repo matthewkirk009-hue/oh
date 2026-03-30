@@ -1,0 +1,289 @@
+:root {
+  --bg: #0a0f1d;
+  --panel: #0f1729;
+  --panel-alt: #121d33;
+  --line: #26344f;
+  --text: #e6ecf9;
+  --muted: #9fb0cd;
+  --accent: #39c7f0;
+  --accent-strong: #0b8ab4;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, "Segoe UI", system-ui, sans-serif;
+  color: var(--text);
+  background: radial-gradient(circle at top, #13253f 0%, var(--bg) 45%);
+  min-height: 100vh;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+.layout {
+  width: min(1180px, 94vw);
+  margin: 1.2rem auto;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 310px 1fr;
+}
+
+.card {
+  border: 1px solid var(--line);
+  background: rgba(15, 23, 41, 0.92);
+  border-radius: 16px;
+  padding: 1rem;
+}
+
+.card-lite {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 0.8rem;
+  background: rgba(18, 29, 51, 0.95);
+}
+
+.sidebar {
+  display: grid;
+  gap: 0.8rem;
+  align-content: start;
+  position: sticky;
+  top: 1rem;
+  height: fit-content;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  font-size: 0.75rem;
+  margin-bottom: 0.45rem;
+}
+
+h1 {
+  font-size: 1.35rem;
+  line-height: 1.25;
+}
+
+.nav-tabs {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.tab-btn {
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  background: #101d33;
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 0.65rem 0.7rem;
+  cursor: pointer;
+}
+
+.tab-btn.active {
+  border-color: var(--accent);
+  background: #12263f;
+}
+
+.content {
+  display: grid;
+}
+
+.tab-panel {
+  display: none;
+  gap: 1rem;
+}
+
+.tab-panel.active {
+  display: grid;
+}
+
+.top-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 1rem;
+}
+
+.stat-card {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.big {
+  font-size: 1.95rem;
+  font-weight: 700;
+}
+
+.strong {
+  font-size: 1.05rem;
+  font-weight: 650;
+}
+
+.small {
+  font-size: 0.88rem;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.progress-wrap {
+  margin-top: 0.5rem;
+  width: 100%;
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: #0b1528;
+  height: 10px;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--accent-strong), var(--accent));
+  transition: width 250ms ease;
+}
+
+.form-grid {
+  display: grid;
+  gap: 0.7rem;
+}
+
+label {
+  display: grid;
+  gap: 0.25rem;
+  font-size: 0.93rem;
+  color: var(--muted);
+}
+
+input,
+select,
+button {
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: #0c172b;
+  color: var(--text);
+  font: inherit;
+  padding: 0.58rem 0.66rem;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:hover {
+  border-color: #3a4c6e;
+}
+
+button.primary {
+  background: linear-gradient(180deg, #1a6f95, #145877);
+  border-color: #1f7398;
+}
+
+.clock {
+  font-size: 2.1rem;
+  font-weight: 700;
+  margin: 0.8rem 0;
+}
+
+.timer-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.todo-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.65rem;
+}
+
+.todo-item {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 0.65rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.7rem;
+  align-items: center;
+  background: rgba(18, 29, 51, 0.95);
+}
+
+.todo-item.empty {
+  justify-content: flex-start;
+  color: var(--muted);
+}
+
+.todo-meta {
+  margin-top: 0.25rem;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.todo-actions {
+  display: flex;
+  gap: 0.45rem;
+}
+
+.notes {
+  margin: 0.55rem 0 0;
+  padding-left: 1.1rem;
+  color: var(--muted);
+  display: grid;
+  gap: 0.45rem;
+}
+
+.row-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+
+.toast {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  background: #13314a;
+  border: 1px solid #2d5575;
+  color: var(--text);
+  border-radius: 10px;
+  padding: 0.55rem 0.7rem;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 180ms ease;
+  pointer-events: none;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 960px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: static;
+  }
+}
+
+@media (max-width: 640px) {
+  .todo-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
