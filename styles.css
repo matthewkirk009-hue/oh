@@ -1,0 +1,162 @@
+:root {
+  --bg: #0a0f1d;
+  --card: #121a2d;
+  --line: #2f3b57;
+  --ink: #e8edf9;
+  --muted: #a8b3c7;
+  --accent: #66e0ff;
+  --gold: #f6cf57;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(165deg, #0a0f1d 0%, #0f1f38 45%, #13233d 100%);
+  color: var(--ink);
+  min-height: 100vh;
+}
+
+.app {
+  width: min(980px, 94%);
+  margin: 1.5rem auto 3rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.hero {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(18, 26, 45, 0.85);
+  padding: 1.1rem 1.2rem;
+}
+
+.hero h1 {
+  margin: 0 0 0.35rem;
+  letter-spacing: 0.04em;
+}
+
+.card {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(18, 26, 45, 0.9);
+  padding: 1rem 1.1rem;
+}
+
+.status-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+h2 {
+  margin-top: 0;
+  color: var(--gold);
+}
+
+.big-text {
+  font-size: 1.45rem;
+  font-weight: 700;
+  margin: 0.2rem 0;
+}
+
+.progress-wrap {
+  background: #091224;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  height: 13px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, #2fd5ff 0%, #6ce8ff 100%);
+  transition: width 250ms ease;
+}
+
+.form-grid {
+  display: grid;
+  gap: 0.75rem;
+}
+
+label {
+  display: grid;
+  gap: 0.3rem;
+  color: var(--muted);
+}
+
+input,
+select,
+button {
+  font: inherit;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  padding: 0.58rem 0.7rem;
+}
+
+input,
+select {
+  background: #0c1528;
+  color: var(--ink);
+}
+
+button {
+  cursor: pointer;
+  background: #193052;
+  color: var(--ink);
+  font-weight: 700;
+}
+
+button:hover {
+  background: #24416e;
+}
+
+.todo-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.todo-item {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 0.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.7rem;
+  background: #0e182d;
+}
+
+.todo-meta {
+  color: var(--muted);
+  font-size: 0.94rem;
+}
+
+.todo-actions {
+  display: flex;
+  gap: 0.45rem;
+}
+
+.todo-actions button {
+  padding: 0.45rem 0.55rem;
+}
+
+.timer-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+@media (max-width: 640px) {
+  .todo-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
