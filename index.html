@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Companion Chat</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="authView" class="view center-view">
+      <div class="glass card narrow">
+        <h1>Companion Chat</h1>
+        <p class="muted">ChatGPT-style private companion chat with optional offline mode.</p>
+        <div class="segmented">
+          <button id="tabLogin" class="primary">Login</button>
+          <button id="tabRegister">Register</button>
+        </div>
+
+        <div id="loginPanel" class="panel active">
+          <label>Username<input id="loginUsername" type="text" /></label>
+          <label>Password<input id="loginPassword" type="password" /></label>
+          <button id="loginBtn" class="primary">Login</button>
+        </div>
+
+        <div id="registerPanel" class="panel">
+          <label>Username<input id="registerUsername" type="text" /></label>
+          <label>Password<input id="registerPassword" type="password" /></label>
+          <button id="registerBtn" class="primary">Create Account</button>
+        </div>
+
+        <button id="offlineBtn" class="secondary">Continue Offline (No Account)</button>
+        <p id="authMessage" class="status"></p>
+      </div>
+    </div>
+
+    <div id="welcomeView" class="view center-view hidden">
+      <div class="glass card narrow">
+        <h2>Welcome Setup</h2>
+        <p class="muted">Give your companion a name and a face.</p>
+        <label>Your Name<input id="userName" type="text" value="You" /></label>
+        <label>AI Name<input id="aiName" type="text" value="Companion" /></label>
+        <label>Avatar URL<input id="avatarUrl" type="url" placeholder="https://..." /></label>
+        <div class="avatar-wrap"><img id="avatarPreview" alt="Avatar preview" src="" /></div>
+        <button id="startChatBtn" class="primary">Enter Chat</button>
+      </div>
+    </div>
+
+    <div id="appView" class="view hidden">
+      <aside class="sidebar">
+        <div class="brand">Companion Chat</div>
+        <button id="newChatBtn" class="primary">+ New chat</button>
+        <div id="conversationList" class="conversation-list"></div>
+
+        <div class="sidebar-actions">
+          <button id="importJsonBtn" class="secondary">Import JSON</button>
+          <button id="exportJsonBtn" class="secondary">Export JSON</button>
+          <button id="exportMdBtn" class="secondary">Export Markdown</button>
+          <input id="importJsonInput" type="file" accept="application/json" class="hidden" />
+        </div>
+
+        <div class="sidebar-footer">
+          <button id="openSettingsBtn" class="secondary">Settings</button>
+          <button id="logoutBtn" class="secondary">Log out</button>
+        </div>
+      </aside>
+
+      <main class="chat-shell">
+        <header class="chat-header">
+          <div class="title-wrap">
+            <img id="chatAvatar" alt="avatar" class="avatar small" />
+            <div>
+              <div id="chatTitle" class="chat-title"></div>
+              <div id="sessionLabel" class="muted tiny"></div>
+            </div>
+          </div>
+          <button id="openSettingsBtnTop" class="secondary">Settings</button>
+        </header>
+
+        <section id="messages" class="messages"></section>
+
+        <form id="chatForm" class="chat-input-wrap">
+          <textarea id="messageInput" rows="3" placeholder="Message your companion..."></textarea>
+          <button type="submit" class="primary send">Send</button>
+        </form>
+      </main>
+
+      <section id="settingsDrawer" class="settings hidden">
+        <h3>Settings</h3>
+        <label>OpenRouter API Key<input id="apiKey" type="password" placeholder="sk-or-v1-..." /></label>
+        <label>System Prompt<textarea id="systemPrompt" rows="5"></textarea></label>
+        <label>Model<select id="modelSelect"></select></label>
+        <div class="inline-row">
+          <input id="newModelInput" type="text" placeholder="openai/gpt-4.1-mini" />
+          <button id="addModelBtn">Add</button>
+        </div>
+
+        <details>
+          <summary>Sampling parameters</summary>
+          <div class="grid2">
+            <label>Temperature<input id="temperature" type="number" step="0.1" min="0" max="2" /></label>
+            <label>Top P<input id="top_p" type="number" step="0.01" min="0" max="1" /></label>
+            <label>Top K<input id="top_k" type="number" step="1" min="0" /></label>
+            <label>Frequency Penalty<input id="frequency_penalty" type="number" step="0.1" min="-2" max="2" /></label>
+            <label>Presence Penalty<input id="presence_penalty" type="number" step="0.1" min="-2" max="2" /></label>
+            <label>Repetition Penalty<input id="repetition_penalty" type="number" step="0.1" min="0" /></label>
+            <label>Min P<input id="min_p" type="number" step="0.01" min="0" max="1" /></label>
+            <label>Max Tokens<input id="max_tokens" type="number" step="1" min="1" /></label>
+          </div>
+        </details>
+
+        <label>Pinned Memory (always injected)<textarea id="pinnedMemory" rows="4"></textarea></label>
+        <label>Keyword Memory (`keyword: memory text`)<textarea id="keywordMemory" rows="4"></textarea></label>
+
+        <button id="saveSettingsBtn" class="primary">Save settings</button>
+        <p id="settingsMessage" class="status"></p>
+      </section>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
