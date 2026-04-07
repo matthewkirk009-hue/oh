@@ -12,6 +12,23 @@
         <h1>Companion Chat</h1>
         <p class="muted">ChatGPT-style private companion chat with optional offline mode.</p>
         <div class="segmented">
+          <button id="tabLogin" class="primary" type="button">Login</button>
+          <button id="tabRegister" type="button">Register</button>
+        </div>
+
+        <div id="loginPanel" class="panel active">
+          <label>Username<input id="loginUsername" type="text" autocomplete="username" /></label>
+          <label>Password<input id="loginPassword" type="password" autocomplete="current-password" /></label>
+          <button id="loginBtn" class="primary" type="button">Login</button>
+        </div>
+
+        <div id="registerPanel" class="panel">
+          <label>Username<input id="registerUsername" type="text" autocomplete="username" /></label>
+          <label>Password<input id="registerPassword" type="password" autocomplete="new-password" /></label>
+          <button id="registerBtn" class="primary" type="button">Create Account</button>
+        </div>
+
+        <button id="offlineBtn" class="secondary" type="button">Continue Offline (No Account)</button>
           <button id="tabLogin" class="primary">Login</button>
     <div id="authView" class="view">
       <div class="card">
@@ -42,6 +59,7 @@
       </div>
     </div>
 
+    <div id="welcomeView" class="view center-view" hidden>
     <div id="welcomeView" class="view center-view hidden">
       <div class="glass card narrow">
         <h2>Welcome Setup</h2>
@@ -50,6 +68,26 @@
         <label>AI Name<input id="aiName" type="text" value="Companion" /></label>
         <label>Avatar URL<input id="avatarUrl" type="url" placeholder="https://..." /></label>
         <div class="avatar-wrap"><img id="avatarPreview" alt="Avatar preview" src="" /></div>
+        <button id="startChatBtn" class="primary" type="button">Enter Chat</button>
+      </div>
+    </div>
+
+    <div id="appView" class="view" hidden>
+      <aside class="sidebar">
+        <div class="brand">Companion Chat</div>
+        <button id="newChatBtn" class="primary" type="button">+ New chat</button>
+        <div id="conversationList" class="conversation-list"></div>
+
+        <div class="sidebar-actions">
+          <button id="importJsonBtn" class="secondary" type="button">Import JSON</button>
+          <button id="exportJsonBtn" class="secondary" type="button">Export JSON</button>
+          <button id="exportMdBtn" class="secondary" type="button">Export Markdown</button>
+          <input id="importJsonInput" type="file" accept="application/json" hidden />
+        </div>
+
+        <div class="sidebar-footer">
+          <button id="openSettingsBtn" class="secondary" type="button">Settings</button>
+          <button id="logoutBtn" class="secondary" type="button">Log out</button>
         <button id="startChatBtn" class="primary">Enter Chat</button>
           <label>Username <input id="registerUsername" type="text" /></label>
           <label>Password <input id="registerPassword" type="password" /></label>
@@ -103,6 +141,7 @@
               <div id="sessionLabel" class="muted tiny"></div>
             </div>
           </div>
+          <button id="openSettingsBtnTop" class="secondary" type="button">Settings</button>
           <button id="openSettingsBtnTop" class="secondary">Settings</button>
         </header>
 
@@ -114,6 +153,7 @@
         </form>
       </main>
 
+      <section id="settingsDrawer" class="settings" hidden>
       <section id="settingsDrawer" class="settings hidden">
         <h3>Settings</h3>
         <label>OpenRouter API Key<input id="apiKey" type="password" placeholder="sk-or-v1-..." /></label>
@@ -121,6 +161,7 @@
         <label>Model<select id="modelSelect"></select></label>
         <div class="inline-row">
           <input id="newModelInput" type="text" placeholder="openai/gpt-4.1-mini" />
+          <button id="addModelBtn" type="button">Add</button>
       <aside>
         <h3>Settings</h3>
         <label>OpenRouter API Key <input id="apiKey" type="password" placeholder="sk-or-v1-..." /></label>
@@ -151,6 +192,9 @@
         <label>Pinned Memory (always injected)<textarea id="pinnedMemory" rows="4"></textarea></label>
         <label>Keyword Memory (`keyword: memory text`)<textarea id="keywordMemory" rows="4"></textarea></label>
 
+        <button id="saveSettingsBtn" class="primary" type="button">Save settings</button>
+        <p id="settingsMessage" class="status"></p>
+      </section>
         <button id="saveSettingsBtn" class="primary">Save settings</button>
         <p id="settingsMessage" class="status"></p>
       </section>

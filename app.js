@@ -1,4 +1,7 @@
 const STORAGE_KEY = "companion-chat-state-v2";
+
+const uid = () => (globalThis.crypto && crypto.randomUUID ? crypto.randomUUID() : `id-${Date.now()}-${Math.random().toString(16).slice(2)}`);
+const clone = (obj) => (globalThis.structuredClone ? structuredClone(obj) : JSON.parse(JSON.stringify(obj)));
 const STORAGE_KEY = "companion-chat-state-v1";
 
 const DEFAULT_STATE = {
@@ -32,6 +35,7 @@ ensureChatExists();
 function loadState() {
   const stored = safeJsonParse(localStorage.getItem(STORAGE_KEY));
   const legacy = safeJsonParse(localStorage.getItem("companion-chat-state-v1"));
+  const merged = deepMerge(clone(DEFAULT_STATE), stored || legacy || {});
   const merged = deepMerge(structuredClone(DEFAULT_STATE), stored || legacy || {});
   normalizeState(merged);
   return merged;
@@ -77,6 +81,7 @@ function normalizeState(target) {
   if (!target.chats.length && Array.isArray(target.messages)) {
     target.chats = [
       {
+        id: uid(),
         id: crypto.randomUUID(),
         title: "Imported Chat",
         createdAt: Date.now(),
@@ -88,6 +93,7 @@ function normalizeState(target) {
   }
 
   target.chats = target.chats.map((chat) => ({
+    id: chat.id || uid(),
     id: chat.id || crypto.randomUUID(),
     title: chat.title || "New chat",
     createdAt: Number(chat.createdAt || Date.now()),
@@ -109,6 +115,7 @@ function ensureChatExists() {
 
 function createEmptyChat(title = "New chat") {
   return {
+    id: uid(),
     id: crypto.randomUUID(),
     title,
     createdAt: Date.now(),
@@ -123,6 +130,12 @@ function activeChat() {
 }
 
 function showOnly(id) {
+  ["authView", "welcomeView", "appView"].forEach((viewId) => {
+    const el = $(viewId);
+    if (el) el.hidden = true;
+  });
+  const target = $(id);
+  if (target) target.hidden = false;
   ["authView", "welcomeView", "appView"].forEach((viewId) => $(viewId).classList.add("hidden"));
   $(id).classList.remove("hidden");
 }
@@ -580,6 +593,7 @@ function importJsonText(text) {
     ];
     if (data.profile) state.profile = deepMerge(state.profile, data.profile);
   } else {
+    const merged = deepMerge(clone(DEFAULT_STATE), data);
     const merged = deepMerge(structuredClone(DEFAULT_STATE), data);
     normalizeState(merged);
 
@@ -631,6 +645,10 @@ function wireEvents() {
     showApp();
   };
 
+  const toggleSettings = () => {
+    const drawer = $("settingsDrawer");
+    drawer.hidden = !drawer.hidden;
+  };
   const toggleSettings = () => $("settingsDrawer").classList.toggle("hidden");
   $("openSettingsBtn").onclick = toggleSettings;
   $("openSettingsBtnTop").onclick = toggleSettings;

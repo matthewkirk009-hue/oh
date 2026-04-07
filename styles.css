@@ -19,6 +19,7 @@ body {
   color: var(--text);
 }
 .view { min-height: 100vh; }
+[hidden] { display: none !important; }
 .hidden { display: none !important; }
 .center-view { display: grid; place-items: center; padding: 20px; }
 .glass {
