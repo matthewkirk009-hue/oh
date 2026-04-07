@@ -13,12 +13,21 @@
         <p class="muted">ChatGPT-style private companion chat with optional offline mode.</p>
         <div class="segmented">
           <button id="tabLogin" class="primary">Login</button>
+    <div id="authView" class="view">
+      <div class="card">
+        <h1>Companion Chat</h1>
+        <p>Private AI chat with optional offline use.</p>
+
+        <div class="tabs">
+          <button id="tabLogin" class="active">Login</button>
           <button id="tabRegister">Register</button>
         </div>
 
         <div id="loginPanel" class="panel active">
           <label>Username<input id="loginUsername" type="text" /></label>
           <label>Password<input id="loginPassword" type="password" /></label>
+          <label>Username <input id="loginUsername" type="text" /></label>
+          <label>Password <input id="loginPassword" type="password" /></label>
           <button id="loginBtn" class="primary">Login</button>
         </div>
 
@@ -42,6 +51,27 @@
         <label>Avatar URL<input id="avatarUrl" type="url" placeholder="https://..." /></label>
         <div class="avatar-wrap"><img id="avatarPreview" alt="Avatar preview" src="" /></div>
         <button id="startChatBtn" class="primary">Enter Chat</button>
+          <label>Username <input id="registerUsername" type="text" /></label>
+          <label>Password <input id="registerPassword" type="password" /></label>
+          <button id="registerBtn" class="primary">Create Account</button>
+        </div>
+
+        <hr />
+        <button id="offlineBtn">Continue Offline (No Account)</button>
+        <p id="authMessage" class="hint"></p>
+      </div>
+    </div>
+
+    <div id="welcomeView" class="view hidden">
+      <div class="card">
+        <h2>Welcome Setup</h2>
+        <label>Your Name <input id="userName" type="text" value="You" /></label>
+        <label>AI Name <input id="aiName" type="text" value="Companion" /></label>
+        <label>Avatar URL <input id="avatarUrl" type="url" placeholder="https://..." /></label>
+        <div class="avatar-preview">
+          <img id="avatarPreview" alt="Avatar preview" src="" />
+        </div>
+        <button id="startChatBtn" class="primary">Start Chatting</button>
       </div>
     </div>
 
@@ -91,6 +121,16 @@
         <label>Model<select id="modelSelect"></select></label>
         <div class="inline-row">
           <input id="newModelInput" type="text" placeholder="openai/gpt-4.1-mini" />
+      <aside>
+        <h3>Settings</h3>
+        <label>OpenRouter API Key <input id="apiKey" type="password" placeholder="sk-or-v1-..." /></label>
+        <label>System Prompt <textarea id="systemPrompt" rows="4"></textarea></label>
+
+        <label>Model
+          <select id="modelSelect"></select>
+        </label>
+        <div class="row">
+          <input id="newModelInput" type="text" placeholder="e.g. openai/gpt-4.1-mini" />
           <button id="addModelBtn">Add</button>
         </div>
 
@@ -114,6 +154,47 @@
         <button id="saveSettingsBtn" class="primary">Save settings</button>
         <p id="settingsMessage" class="status"></p>
       </section>
+          <summary>Sampling Parameters</summary>
+          <div class="grid2">
+            <label>Temperature <input id="temperature" type="number" step="0.1" min="0" max="2" /></label>
+            <label>Top P <input id="top_p" type="number" step="0.01" min="0" max="1" /></label>
+            <label>Top K <input id="top_k" type="number" step="1" min="0" /></label>
+            <label>Frequency Penalty <input id="frequency_penalty" type="number" step="0.1" min="-2" max="2" /></label>
+            <label>Presence Penalty <input id="presence_penalty" type="number" step="0.1" min="-2" max="2" /></label>
+            <label>Repetition Penalty <input id="repetition_penalty" type="number" step="0.1" min="0" /></label>
+            <label>Min P <input id="min_p" type="number" step="0.01" min="0" max="1" /></label>
+            <label>Max Tokens <input id="max_tokens" type="number" step="1" min="1" /></label>
+          </div>
+        </details>
+
+        <h4>Memory</h4>
+        <label>Pinned Memory (always injected)
+          <textarea id="pinnedMemory" rows="4" placeholder="Core personality and persistent context..."></textarea>
+        </label>
+        <label>Keyword Memory
+          <textarea id="keywordMemory" rows="4" placeholder="keyword: memory text (one per line)"></textarea>
+        </label>
+
+        <div class="row wrap">
+          <button id="exportJsonBtn">Export JSON</button>
+          <button id="importJsonBtn">Import JSON</button>
+          <button id="exportMdBtn">Export Markdown</button>
+          <input id="importJsonInput" type="file" accept="application/json" class="hidden" />
+        </div>
+        <button id="logoutBtn">Log out</button>
+      </aside>
+
+      <main>
+        <header>
+          <img id="chatAvatar" alt="Avatar" class="small-avatar" />
+          <h2 id="chatTitle">Companion Chat</h2>
+        </header>
+        <section id="messages"></section>
+        <form id="chatForm">
+          <textarea id="messageInput" rows="3" placeholder="Type a message..."></textarea>
+          <button class="primary" type="submit">Send</button>
+        </form>
+      </main>
     </div>
 
     <script src="app.js"></script>
