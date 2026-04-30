@@ -3,241 +3,104 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Companion Chat</title>
+    <title>Soccer Dynasty Manager</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div id="authView" class="view center-view">
-      <div class="glass card narrow">
-        <h1>Companion Chat</h1>
-        <p class="muted">ChatGPT-style private companion chat with optional offline mode.</p>
-        <div class="segmented">
-          <button id="tabLogin" class="primary" type="button">Login</button>
-          <button id="tabRegister" type="button">Register</button>
-        </div>
-
-        <div id="loginPanel" class="panel active">
-          <label>Username<input id="loginUsername" type="text" autocomplete="username" /></label>
-          <label>Password<input id="loginPassword" type="password" autocomplete="current-password" /></label>
-          <button id="loginBtn" class="primary" type="button">Login</button>
-        </div>
-
-        <div id="registerPanel" class="panel">
-          <label>Username<input id="registerUsername" type="text" autocomplete="username" /></label>
-          <label>Password<input id="registerPassword" type="password" autocomplete="new-password" /></label>
-          <button id="registerBtn" class="primary" type="button">Create Account</button>
-        </div>
-
-        <button id="offlineBtn" class="secondary" type="button">Continue Offline (No Account)</button>
-          <button id="tabLogin" class="primary">Login</button>
-    <div id="authView" class="view">
-      <div class="card">
-        <h1>Companion Chat</h1>
-        <p>Private AI chat with optional offline use.</p>
-
+    <div id="authView" class="view centered">
+      <div class="card auth-card">
+        <h1>⚽ Soccer Dynasty Manager</h1>
+        <p class="muted">Build your squad, run your finances, simulate matches, and climb the league.</p>
         <div class="tabs">
-          <button id="tabLogin" class="active">Login</button>
-          <button id="tabRegister">Register</button>
+          <button id="tabLogin" class="btn btn-primary">Login</button>
+          <button id="tabRegister" class="btn">Register</button>
         </div>
 
         <div id="loginPanel" class="panel active">
-          <label>Username<input id="loginUsername" type="text" /></label>
-          <label>Password<input id="loginPassword" type="password" /></label>
           <label>Username <input id="loginUsername" type="text" /></label>
           <label>Password <input id="loginPassword" type="password" /></label>
-          <button id="loginBtn" class="primary">Login</button>
+          <button id="loginBtn" class="btn btn-primary">Login</button>
         </div>
 
         <div id="registerPanel" class="panel">
-          <label>Username<input id="registerUsername" type="text" /></label>
-          <label>Password<input id="registerPassword" type="password" /></label>
-          <button id="registerBtn" class="primary">Create Account</button>
-        </div>
-
-        <button id="offlineBtn" class="secondary">Continue Offline (No Account)</button>
-        <p id="authMessage" class="status"></p>
-      </div>
-    </div>
-
-    <div id="welcomeView" class="view center-view" hidden>
-    <div id="welcomeView" class="view center-view hidden">
-      <div class="glass card narrow">
-        <h2>Welcome Setup</h2>
-        <p class="muted">Give your companion a name and a face.</p>
-        <label>Your Name<input id="userName" type="text" value="You" /></label>
-        <label>AI Name<input id="aiName" type="text" value="Companion" /></label>
-        <label>Avatar URL<input id="avatarUrl" type="url" placeholder="https://..." /></label>
-        <div class="avatar-wrap"><img id="avatarPreview" alt="Avatar preview" src="" /></div>
-        <button id="startChatBtn" class="primary" type="button">Enter Chat</button>
-      </div>
-    </div>
-
-    <div id="appView" class="view" hidden>
-      <aside class="sidebar">
-        <div class="brand">Companion Chat</div>
-        <button id="newChatBtn" class="primary" type="button">+ New chat</button>
-        <div id="conversationList" class="conversation-list"></div>
-
-        <div class="sidebar-actions">
-          <button id="importJsonBtn" class="secondary" type="button">Import JSON</button>
-          <button id="exportJsonBtn" class="secondary" type="button">Export JSON</button>
-          <button id="exportMdBtn" class="secondary" type="button">Export Markdown</button>
-          <input id="importJsonInput" type="file" accept="application/json" hidden />
-        </div>
-
-        <div class="sidebar-footer">
-          <button id="openSettingsBtn" class="secondary" type="button">Settings</button>
-          <button id="logoutBtn" class="secondary" type="button">Log out</button>
-        <button id="startChatBtn" class="primary">Enter Chat</button>
           <label>Username <input id="registerUsername" type="text" /></label>
           <label>Password <input id="registerPassword" type="password" /></label>
-          <button id="registerBtn" class="primary">Create Account</button>
+          <button id="registerBtn" class="btn btn-primary">Create Account</button>
         </div>
-
-        <hr />
-        <button id="offlineBtn">Continue Offline (No Account)</button>
-        <p id="authMessage" class="hint"></p>
-      </div>
-    </div>
-
-    <div id="welcomeView" class="view hidden">
-      <div class="card">
-        <h2>Welcome Setup</h2>
-        <label>Your Name <input id="userName" type="text" value="You" /></label>
-        <label>AI Name <input id="aiName" type="text" value="Companion" /></label>
-        <label>Avatar URL <input id="avatarUrl" type="url" placeholder="https://..." /></label>
-        <div class="avatar-preview">
-          <img id="avatarPreview" alt="Avatar preview" src="" />
-        </div>
-        <button id="startChatBtn" class="primary">Start Chatting</button>
+        <p id="authMsg" class="status"></p>
       </div>
     </div>
 
     <div id="appView" class="view hidden">
-      <aside class="sidebar">
-        <div class="brand">Companion Chat</div>
-        <button id="newChatBtn" class="primary">+ New chat</button>
-        <div id="conversationList" class="conversation-list"></div>
+      <aside class="sidebar card">
+        <h2 id="teamNameHeader">My Team</h2>
+        <p id="clubRecord" class="muted"></p>
+        <label>Team Name <input id="teamNameInput" type="text" /></label>
+        <label>Primary Color <input id="teamColorInput" type="color" value="#2f7cff" /></label>
+        <label>Logo URL <input id="teamLogoInput" type="url" placeholder="https://..." /></label>
+        <button id="saveBrandBtn" class="btn">Save Team Brand</button>
 
-        <div class="sidebar-actions">
-          <button id="importJsonBtn" class="secondary">Import JSON</button>
-          <button id="exportJsonBtn" class="secondary">Export JSON</button>
-          <button id="exportMdBtn" class="secondary">Export Markdown</button>
-          <input id="importJsonInput" type="file" accept="application/json" class="hidden" />
-        </div>
+        <hr />
+        <h3>Finance</h3>
+        <p id="budgetLabel">Budget: $0</p>
+        <label>Sponsor income (+$) <input id="incomeInput" type="number" min="0" value="100000" /></label>
+        <label>Facilities expense (-$) <input id="expenseInput" type="number" min="0" value="50000" /></label>
+        <button id="applyFinanceBtn" class="btn">Apply Financials</button>
 
-        <div class="sidebar-footer">
-          <button id="openSettingsBtn" class="secondary">Settings</button>
-          <button id="logoutBtn" class="secondary">Log out</button>
-        </div>
+        <hr />
+        <button id="genRivalsBtn" class="btn">Generate AI Teams</button>
+        <button id="simulateBtn" class="btn btn-primary">Simulate Next League Match</button>
+        <button id="exportBtn" class="btn">Share Save (Export)</button>
+        <input id="importInput" type="file" accept="application/json" hidden />
+        <button id="importBtn" class="btn">Import Save</button>
+        <button id="logoutBtn" class="btn">Logout</button>
       </aside>
 
-      <main class="chat-shell">
-        <header class="chat-header">
-          <div class="title-wrap">
-            <img id="chatAvatar" alt="avatar" class="avatar small" />
-            <div>
-              <div id="chatTitle" class="chat-title"></div>
-              <div id="sessionLabel" class="muted tiny"></div>
-            </div>
-          </div>
-          <button id="openSettingsBtnTop" class="secondary" type="button">Settings</button>
-          <button id="openSettingsBtnTop" class="secondary">Settings</button>
-        </header>
+      <main class="main-grid">
+        <section class="card">
+          <h3>Roster Manager</h3>
+          <form id="addPlayerForm" class="grid-form">
+            <label>Name <input id="pName" required type="text" /></label>
+            <label>Gender
+              <select id="pGender">
+                <option>Male</option><option>Female</option><option>Non-binary</option>
+              </select>
+            </label>
+            <label>Position
+              <select id="pPosition">
+                <option>GK</option><option>DEF</option><option>MID</option><option>FWD</option>
+              </select>
+            </label>
+            <label>Skill Tier
+              <select id="pTier">
+                <option value="1">1</option>
+                <option value="20">20</option>
+                <option value="50">50</option>
+                <option value="90">OP</option>
+                <option value="120">Absolute God</option>
+              </select>
+            </label>
+            <label>Jersey # <input id="pNumber" type="number" min="1" max="999" required /></label>
+            <label>Photo (jpg/png) <input id="pPhoto" type="file" accept="image/jpeg,image/png" /></label>
+            <button class="btn btn-primary" type="submit">Add Player</button>
+          </form>
+          <div id="roster" class="roster"></div>
+        </section>
 
-        <section id="messages" class="messages"></section>
+        <section class="card">
+          <h3>League + Leaderboards</h3>
+          <div id="standings"></div>
+          <h4>Top Players</h4>
+          <div id="topPlayers"></div>
+          <h4>Achievements</h4>
+          <ul id="achievements"></ul>
+        </section>
 
-        <form id="chatForm" class="chat-input-wrap">
-          <textarea id="messageInput" rows="3" placeholder="Message your companion..."></textarea>
-          <button type="submit" class="primary send">Send</button>
-        </form>
-      </main>
-
-      <section id="settingsDrawer" class="settings" hidden>
-      <section id="settingsDrawer" class="settings hidden">
-        <h3>Settings</h3>
-        <label>OpenRouter API Key<input id="apiKey" type="password" placeholder="sk-or-v1-..." /></label>
-        <label>System Prompt<textarea id="systemPrompt" rows="5"></textarea></label>
-        <label>Model<select id="modelSelect"></select></label>
-        <div class="inline-row">
-          <input id="newModelInput" type="text" placeholder="openai/gpt-4.1-mini" />
-          <button id="addModelBtn" type="button">Add</button>
-      <aside>
-        <h3>Settings</h3>
-        <label>OpenRouter API Key <input id="apiKey" type="password" placeholder="sk-or-v1-..." /></label>
-        <label>System Prompt <textarea id="systemPrompt" rows="4"></textarea></label>
-
-        <label>Model
-          <select id="modelSelect"></select>
-        </label>
-        <div class="row">
-          <input id="newModelInput" type="text" placeholder="e.g. openai/gpt-4.1-mini" />
-          <button id="addModelBtn">Add</button>
-        </div>
-
-        <details>
-          <summary>Sampling parameters</summary>
-          <div class="grid2">
-            <label>Temperature<input id="temperature" type="number" step="0.1" min="0" max="2" /></label>
-            <label>Top P<input id="top_p" type="number" step="0.01" min="0" max="1" /></label>
-            <label>Top K<input id="top_k" type="number" step="1" min="0" /></label>
-            <label>Frequency Penalty<input id="frequency_penalty" type="number" step="0.1" min="-2" max="2" /></label>
-            <label>Presence Penalty<input id="presence_penalty" type="number" step="0.1" min="-2" max="2" /></label>
-            <label>Repetition Penalty<input id="repetition_penalty" type="number" step="0.1" min="0" /></label>
-            <label>Min P<input id="min_p" type="number" step="0.01" min="0" max="1" /></label>
-            <label>Max Tokens<input id="max_tokens" type="number" step="1" min="1" /></label>
-          </div>
-        </details>
-
-        <label>Pinned Memory (always injected)<textarea id="pinnedMemory" rows="4"></textarea></label>
-        <label>Keyword Memory (`keyword: memory text`)<textarea id="keywordMemory" rows="4"></textarea></label>
-
-        <button id="saveSettingsBtn" class="primary" type="button">Save settings</button>
-        <p id="settingsMessage" class="status"></p>
-      </section>
-        <button id="saveSettingsBtn" class="primary">Save settings</button>
-        <p id="settingsMessage" class="status"></p>
-      </section>
-          <summary>Sampling Parameters</summary>
-          <div class="grid2">
-            <label>Temperature <input id="temperature" type="number" step="0.1" min="0" max="2" /></label>
-            <label>Top P <input id="top_p" type="number" step="0.01" min="0" max="1" /></label>
-            <label>Top K <input id="top_k" type="number" step="1" min="0" /></label>
-            <label>Frequency Penalty <input id="frequency_penalty" type="number" step="0.1" min="-2" max="2" /></label>
-            <label>Presence Penalty <input id="presence_penalty" type="number" step="0.1" min="-2" max="2" /></label>
-            <label>Repetition Penalty <input id="repetition_penalty" type="number" step="0.1" min="0" /></label>
-            <label>Min P <input id="min_p" type="number" step="0.01" min="0" max="1" /></label>
-            <label>Max Tokens <input id="max_tokens" type="number" step="1" min="1" /></label>
-          </div>
-        </details>
-
-        <h4>Memory</h4>
-        <label>Pinned Memory (always injected)
-          <textarea id="pinnedMemory" rows="4" placeholder="Core personality and persistent context..."></textarea>
-        </label>
-        <label>Keyword Memory
-          <textarea id="keywordMemory" rows="4" placeholder="keyword: memory text (one per line)"></textarea>
-        </label>
-
-        <div class="row wrap">
-          <button id="exportJsonBtn">Export JSON</button>
-          <button id="importJsonBtn">Import JSON</button>
-          <button id="exportMdBtn">Export Markdown</button>
-          <input id="importJsonInput" type="file" accept="application/json" class="hidden" />
-        </div>
-        <button id="logoutBtn">Log out</button>
-      </aside>
-
-      <main>
-        <header>
-          <img id="chatAvatar" alt="Avatar" class="small-avatar" />
-          <h2 id="chatTitle">Companion Chat</h2>
-        </header>
-        <section id="messages"></section>
-        <form id="chatForm">
-          <textarea id="messageInput" rows="3" placeholder="Type a message..."></textarea>
-          <button class="primary" type="submit">Send</button>
-        </form>
+        <section class="card wide">
+          <h3>Match Center</h3>
+          <div id="highlightStrip" class="highlights"></div>
+          <pre id="commentary" class="commentary"></pre>
+        </section>
       </main>
     </div>
 
